@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nisarg Patel — Projects</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B1013;
+    --surface: #121A1F;
+    --line: #24313880;
+    --line-strong: #3A4B52;
+    --text: #E7ECEE;
+    --text-muted: #7E8C93;
+    --text-dim: #4C5A61;
+    --jade: #4EA37D;
+    --jade-dim: #2E5F49;
+    --copper: #C98A3E;
+    --copper-dim: #6B4A24;
+    --red: #C9603E;
+    --red-dim: #6B3524;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-attachment: fixed;
+  }
+  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  header{ padding: 28px 0 18px; border-bottom: 1px solid var(--line); }
+  .brand{ display:flex; align-items:center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .brand-name{ font-family: var(--mono); font-size: 14px; color: var(--text-muted); letter-spacing: 0.02em; }
+  .brand-name b{ color: var(--text); font-weight: 500; }
+  .status-pill{
+    font-family: var(--mono); font-size: 11px; color: var(--jade);
+    border: 1px solid var(--jade-dim); background: rgba(78,163,125,0.08);
+    padding: 5px 10px; border-radius: 3px;
+    display: flex; align-items: center; gap: 7px; letter-spacing: 0.03em;
+  }
+  .status-pill .dot{ width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ opacity: 1; } 50%{ opacity: 0.35; } }
+
+  .hero{ padding: 90px 0 70px; border-bottom: 1px solid var(--line); }
+  .hero-eyebrow{ font-family: var(--mono); font-size: 12px; color: var(--copper); letter-spacing: 0.08em; margin-bottom: 22px; }
+  .hero-eyebrow::before{ content: "// "; color: var(--text-dim); }
+  h1{ font-family: var(--mono); font-weight: 700; font-size: clamp(30px, 5vw, 48px); letter-spacing: -0.01em; min-height: 1.3em; }
+  .cursor{ display: inline-block; width: 0.5ch; background: var(--jade); margin-left: 2px; animation: blink 1s step-end infinite; }
+  @keyframes blink{ 50%{ opacity: 0; } }
+  .hero-sub{ margin-top: 22px; max-width: 580px; color: var(--text-muted); font-size: 16px; }
+  .hero-note{
+    margin-top: 26px; font-family: var(--mono); font-size: 12px; color: var(--text-dim);
+    border-left: 2px solid var(--jade-dim); padding-left: 12px;
+  }
+  .hero-note b{ color: var(--jade); font-weight: 500; }
+
+  .section{ padding: 64px 0; border-bottom: 1px solid var(--line); }
+  .section:last-of-type{ border-bottom: none; }
+  .section-head{ display:flex; align-items:baseline; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 8px; }
+  .section-title{ font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; }
+  .section-count{ font-family: var(--mono); font-size: 12px; color: var(--text-dim); }
+
+  .file-list{ display: flex; flex-direction: column; gap: 14px; }
+  .file{ background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 22px 24px; }
+  .file-top{ display:flex; align-items:flex-start; justify-content: space-between; gap: 16px; margin-bottom: 10px; }
+  .file-name-row{ display:flex; align-items:center; gap: 10px; }
+  .file-icon{ width: 28px; height: 28px; flex-shrink:0; border-radius: 4px; display:flex; align-items:center; justify-content:center; border: 1px solid var(--jade-dim); color: var(--jade); }
+  .file-name{ font-family: var(--mono); font-size: 16px; font-weight: 500; color: var(--text); }
+  .badge{ font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; padding: 4px 8px; border-radius: 3px; white-space: nowrap; text-transform: uppercase; flex-shrink: 0; }
+  .badge.done{ color: var(--jade); background: rgba(78,163,125,0.1); border: 1px solid var(--jade-dim); }
+  .file-desc{ color: var(--text-muted); font-size: 14.5px; margin: 10px 0 16px; max-width: 620px; }
+  .file-bottom{ display:flex; align-items:center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .stack{ display:flex; flex-wrap: wrap; gap: 7px; }
+  .tag{ font-family: var(--mono); font-size: 11px; color: var(--text-dim); border: 1px solid var(--line); padding: 3px 8px; border-radius: 3px; }
+
+  .run-toggle{
+    font-family: var(--mono); font-size: 12px; color: var(--bg); background: var(--jade);
+    border: none; padding: 7px 14px; border-radius: 3px; cursor: pointer;
+    display:flex; align-items:center; gap: 7px; font-weight: 500;
+  }
+  .run-toggle:hover{ background: #5fb88e; }
+  .src-link{ font-family: var(--mono); font-size: 11px; color: var(--text-dim); text-decoration: none; }
+  .src-link:hover{ color: var(--text-muted); }
+  .file-actions{ display:flex; align-items:center; gap: 14px; }
+
+  .console{ margin-top: 18px; border-top: 1px dashed var(--line-strong); padding-top: 18px; display: none; }
+  .console.open{ display: block; }
+  .console-field{ margin-bottom: 14px; }
+  .console-label{ font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; display:block; }
+  .console textarea, .console input[type="text"]{
+    width: 100%; background: var(--bg); border: 1px solid var(--line); color: var(--text);
+    font-family: var(--mono); font-size: 13px; padding: 10px 12px; border-radius: 3px; resize: vertical;
+  }
+  .console textarea{ min-height: 64px; }
+  .console input[type="number"]{
+    width: 100%; background: var(--bg); border: 1px solid var(--line); color: var(--text);
+    font-family: var(--mono); font-size: 13px; padding: 8px 10px; border-radius: 3px;
+  }
+  .num-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
+  .num-grid label{ font-family: var(--mono); font-size: 10.5px; color: var(--text-dim); display:block; margin-bottom: 5px; }
+  .console-btns{ display:flex; gap: 10px; flex-wrap: wrap; margin: 4px 0 14px; }
+  .btn{
+    font-family: var(--mono); font-size: 12px; background: transparent; color: var(--text);
+    border: 1px solid var(--line-strong); padding: 8px 14px; border-radius: 3px; cursor: pointer;
+  }
+  .btn:hover{ border-color: var(--jade); color: var(--jade); }
+  .btn.primary{ border-color: var(--jade-dim); color: var(--jade); }
+  .out{
+    background: #090D0F; border: 1px solid var(--line); border-radius: 3px; padding: 12px 14px;
+    font-family: var(--mono); font-size: 12.5px; color: var(--text-muted); white-space: pre-wrap; word-break: break-all;
+    min-height: 20px;
+  }
+  .out .ok{ color: var(--jade); display:block; }
+  .out .warn{ color: var(--copper); display:block; }
+  .out .err{ color: var(--red); display:block; }
+  .out .prompt{ color: var(--text-dim); display:block; }
+
+  .empty{ border: 1px dashed var(--line-strong); border-radius: 4px; padding: 26px 24px; color: var(--text-dim); font-family: var(--mono); font-size: 13px; }
+  .empty span{ color: var(--copper); }
+
+  footer{ padding: 40px 0 60px; display:flex; align-items:center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-text{ font-family: var(--mono); font-size: 12px; color: var(--text-dim); }
+  .footer-link{ font-family: var(--mono); font-size: 12px; color: var(--text-muted); text-decoration: none; }
+  .footer-link:hover{ color: var(--text); }
+
+  @media (max-width: 560px){
+    .hero{ padding: 60px 0 50px; }
+    .section{ padding: 44px 0; }
+    .num-grid{ grid-template-columns: repeat(2, 1fr); }
+    .file-bottom{ align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="brand-name"><b>Nisarg Patel</b> / projects.log</div>
+      <div class="status-pill"><span class="dot"></span>2 repositories runnable</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-eyebrow">decrypting profile</div>
+    <h1><span id="hero-text"></span><span class="cursor">&nbsp;</span></h1>
+    <p class="hero-sub">A running log of what I've built and what's currently in progress — mostly Python, mostly focused on security and practical tools.</p>
+    <div class="hero-note"><b>Run it, don't just read it</b> — every project below is reimplemented in plain HTML/CSS/JS and runs live in your browser, using the same logic as the original scripts. No install, no server, no build step.</div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">Done</div>
+      <div class="section-count">2 shipped</div>
+    </div>
+    <div class="file-list">
+
+      <!-- FILE ENCRYPTION -->
+      <div class="file">
+        <div class="file-top">
+          <div class="file-name-row">
+            <div class="file-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <div class="file-name">File-Encryption-and-Decryption</div>
+          </div>
+          <div class="badge done">done</div>
+        </div>
+        <p class="file-desc">Originally a Python CLI using Fernet symmetric encryption. This browser version uses the same idea — generate a key, then lock or unlock text with it — via the Web Crypto API (AES-GCM), so it's real encryption, not a simulation.</p>
+        <div class="file-bottom">
+          <div class="stack">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript (Web Crypto API)</span>
+          </div>
+          <div class="file-actions">
+            <a class="src-link" href="https://github.com/NisargPatel2211/File-Encryption-and-Decryption" target="_blank" rel="noopener">original python ↗</a>
+            <button class="run-toggle" data-target="console-fe">run in browser</button>
+          </div>
+        </div>
+
+        <div class="console" id="console-fe">
+          <div class="console-field">
+            <label class="console-label">content</label>
+            <textarea id="fe-content">hi i am hello</textarea>
+          </div>
+          <div class="console-btns">
+            <button class="btn primary" id="fe-genkey">1. generate key</button>
+            <button class="btn" id="fe-encrypt">2. encrypt</button>
+            <button class="btn" id="fe-decrypt">3. decrypt</button>
+          </div>
+          <div class="out" id="fe-out"><span class="prompt">$ waiting for key generation…</span></div>
+        </div>
+      </div>
+
+      <!-- PASSWORD GENERATOR -->
+      <div class="file">
+        <div class="file-top">
+          <div class="file-name-row">
+            <div class="file-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"></path></svg>
+            </div>
+            <div class="file-name">Password-Generator-and-strength-checker</div>
+          </div>
+          <div class="badge done">done</div>
+        </div>
+        <p class="file-desc">Generates passwords to your exact spec using the browser's cryptographically secure random source, and checks any password against the same five strength rules as the original script.</p>
+        <div class="file-bottom">
+          <div class="stack">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript (crypto.getRandomValues)</span>
+          </div>
+          <div class="file-actions">
+            <a class="src-link" href="https://github.com/NisargPatel2211/Password-Generator-and-strength-checker" target="_blank" rel="noopener">original python ↗</a>
+            <button class="run-toggle" data-target="console-pw">run in browser</button>
+          </div>
+        </div>
+
+        <div class="console" id="console-pw">
+          <div class="num-grid">
+            <div><label>uppercase</label><input type="number" id="pw-upper" value="2" min="0"></div>
+            <div><label>lowercase</label><input type="number" id="pw-lower" value="4" min="0"></div>
+            <div><label>digits</label><input type="number" id="pw-digit" value="2" min="0"></div>
+            <div><label>symbols</label><input type="number" id="pw-symbol" value="2" min="0"></div>
+          </div>
+          <div class="console-btns">
+            <button class="btn primary" id="pw-generate">generate password</button>
+          </div>
+          <div class="out" id="pw-out"><span class="prompt">$ set your counts and generate</span></div>
+
+          <div class="console-field" style="margin-top:18px;">
+            <label class="console-label">or check your own password</label>
+            <input type="text" id="pw-check-input" placeholder="type a password to test">
+          </div>
+          <div class="console-btns">
+            <button class="btn" id="pw-check-btn">check strength</button>
+          </div>
+          <div class="out" id="pw-check-out"><span class="prompt">$ nothing checked yet</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">Ongoing</div>
+      <div class="section-count">0 in progress</div>
+    </div>
+    <div class="empty">
+      <span>&gt;</span> nothing checked out right now — tell me what you're building and it'll show up here.
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-text">vanilla HTML / CSS / JS — no dependencies, no build step</div>
+    <a class="footer-link" href="https://github.com/NisargPatel2211" target="_blank" rel="noopener">github.com/NisargPatel2211 &rarr;</a>
+  </footer>
+</div>
+
+<script>
+  // hero scramble
+  const target = "Nisarg Patel";
+  const chars = "!<>-_\\/[]{}—=+*^?#";
+  const heroEl = document.getElementById('hero-text');
+  let frame = 0;
+  const totalFrames = target.length * 3;
+  function scramble(){
+    let out = "";
+    const revealCount = Math.floor((frame / totalFrames) * target.length);
+    for(let i = 0; i < target.length; i++){
+      if(i < revealCount){ out += target[i]; }
+      else if(target[i] === " "){ out += " "; }
+      else{ out += chars[Math.floor(Math.random() * chars.length)]; }
+    }
+    heroEl.textContent = out;
+    frame++;
+    if(frame <= totalFrames){ requestAnimationFrame(scramble); }
+    else{ heroEl.textContent = target; }
+  }
+  scramble();
+
+  // toggle console panels
+  document.querySelectorAll('.run-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = document.getElementById(btn.dataset.target);
+      panel.classList.toggle('open');
+      btn.textContent = panel.classList.contains('open') ? 'hide console' : 'run in browser';
+    });
+  });
+
+  function setOut(el, text, cls){
+    el.innerHTML = '';
+    const span = document.createElement('span');
+    if(cls) span.className = cls;
+    span.textContent = text;
+    el.appendChild(span);
+  }
+
+  function bytesToBase64(bytes){
+    let bin = '';
+    bytes.forEach(b => bin += String.fromCharCode(b));
+    return btoa(bin);
+  }
+  function base64ToBytes(b64){
+    const bin = atob(b64);
+    const bytes = new Uint8Array(bin.length);
+    for(let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return bytes;
+  }
+
+  // =========================================================
+  // FILE ENCRYPTION — Web Crypto AES-GCM, mirrors the
+  // generate_key / encrypt / decrypt flow of the original script
+  // =========================================================
+  let feKey = null; // CryptoKey, kept in memory like secret.key on disk
+
+  document.getElementById('fe-genkey').addEventListener('click', async () => {
+    const out = document.getElementById('fe-out');
+    try{
+      feKey = await crypto.subtle.generateKey({ name: 'AES-GCM', length: 256 }, true, ['encrypt', 'decrypt']);
+      const raw = await crypto.subtle.exportKey('raw', feKey);
+      const keyB64 = bytesToBase64(new Uint8Array(raw));
+      setOut(out, 'key: ' + keyB64 + '\nkey generated and held in memory — reuse it to decrypt later, same as secret.key in the CLI script.', 'ok');
+    }catch(e){
+      setOut(out, 'error: ' + (e && e.message ? e.message : e), 'err');
+      console.error(e);
+    }
+  });
+
+  document.getElementById('fe-encrypt').addEventListener('click', async () => {
+    const out = document.getElementById('fe-out');
+    const box = document.getElementById('fe-content');
+    if(!feKey){ setOut(out, 'generate a key first', 'warn'); return; }
+    try{
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const plaintext = new TextEncoder().encode(box.value);
+      const ciphertext = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, feKey, plaintext);
+      const combined = new Uint8Array(iv.length + ciphertext.byteLength);
+      combined.set(iv, 0);
+      combined.set(new Uint8Array(ciphertext), iv.length);
+      box.value = bytesToBase64(combined);
+      setOut(out, 'File encrypted successfully', 'ok');
+    }catch(e){
+      setOut(out, 'error: ' + (e && e.message ? e.message : e), 'err');
+      console.error(e);
+    }
+  });
+
+  document.getElementById('fe-decrypt').addEventListener('click', async () => {
+    const out = document.getElementById('fe-out');
+    const box = document.getElementById('fe-content');
+    if(!feKey){ setOut(out, 'generate a key first', 'warn'); return; }
+    try{
+      const combined = base64ToBytes(box.value.trim());
+      const iv = combined.slice(0, 12);
+      const ciphertext = combined.slice(12);
+      const plaintextBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, feKey, ciphertext);
+      box.value = new TextDecoder().decode(plaintextBuf);
+      setOut(out, 'File decrypted successfully', 'ok');
+    }catch(e){
+      setOut(out, 'Invalid key or corrupted/already-decrypted data', 'err');
+    }
+  });
+
+  // =========================================================
+  // PASSWORD GENERATOR + CHECKER — mirrors check_password and
+  // password_generator_system from the original script
+  // =========================================================
+  function checkPassword(password){
+    const issues = [];
+    if(password.length < 8) issues.push('minimum 8 characters');
+    if(!/[A-Z]/.test(password)) issues.push('at least 1 uppercase letter');
+    if(!/[a-z]/.test(password)) issues.push('at least 1 lowercase letter');
+    if(!/[0-9]/.test(password)) issues.push('at least 1 digit');
+    if(!/[!@#$%^&*()\-_=+\[\]{}|;:",<.>/?`~]/.test(password)) issues.push('at least 1 special symbol');
+    if(issues.length) return 'Password needs: ' + issues.join(', ');
+    return password + ' is a strong password';
+  }
+
+  function secureChoice(str){
+    const idx = crypto.getRandomValues(new Uint32Array(1))[0] % str.length;
+    return str[idx];
+  }
+
+  function secureShuffle(arr){
+    for(let i = arr.length - 1; i > 0; i--){
+      const j = crypto.getRandomValues(new Uint32Array(1))[0] % (i + 1);
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function passwordGeneratorSystem(nUpper, nLower, nDigit, nSymbol){
+    const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lower = 'abcdefghijklmnopqrstuvwxyz';
+    const digit = '0123456789';
+    const symbol = "!@#$%^&*()-_=+[]{}'|;:\",<.>/?`~";
+
+    if(nUpper + nLower + nDigit + nSymbol === 0) return null;
+
+    const chars = [];
+    for(let i = 0; i < nUpper; i++) chars.push(secureChoice(upper));
+    for(let i = 0; i < nLower; i++) chars.push(secureChoice(lower));
+    for(let i = 0; i < nDigit; i++) chars.push(secureChoice(digit));
+    for(let i = 0; i < nSymbol; i++) chars.push(secureChoice(symbol));
+
+    secureShuffle(chars);
+    return checkPassword(chars.join(''));
+  }
+
+  document.getElementById('pw-generate').addEventListener('click', () => {
+    const out = document.getElementById('pw-out');
+    const u = parseInt(document.getElementById('pw-upper').value) || 0;
+    const l = parseInt(document.getElementById('pw-lower').value) || 0;
+    const d = parseInt(document.getElementById('pw-digit').value) || 0;
+    const s = parseInt(document.getElementById('pw-symbol').value) || 0;
+    const result = passwordGeneratorSystem(u, l, d, s);
+    if(result === null){
+      setOut(out, 'You must request at least one character.', 'warn');
+    }else if(result.includes('is a strong password')){
+      setOut(out, result, 'ok');
+    }else{
+      setOut(out, result, 'warn');
+    }
+  });
+
+  document.getElementById('pw-check-btn').addEventListener('click', () => {
+    const out = document.getElementById('pw-check-out');
+    const pw = document.getElementById('pw-check-input').value;
+    if(!pw){ setOut(out, 'type something to check', 'warn'); return; }
+    const result = checkPassword(pw);
+    setOut(out, result, result.includes('is a strong password') ? 'ok' : 'warn');
+  });
+</script>
+
+</body>
+</html>
